@@ -1,0 +1,24 @@
+system:diag_subsumption_small_nodiag
+
+event:tau
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:qprep{}
+location:P:q{}
+location:P:qcoarse{}
+location:P:qdone{labels: error}
+
+edge:P:q0:qprep:tau{do: x=0;y=0}[]
+edge:P:qprep:q:tau{provided: x==1 : do: y=0}[]
+
+edge:P:q:qcoarse:tau{do: x=0;y=0}[]
+edge:P:qcoarse:q:tau{provided: x>=1 && x<=2 : do: y=0}[]
+
+# Control variant: replacing the diagonal guard with a simple one removes the
+# sim/eq node-count difference.
+edge:P:q:qdone:tau{provided: x<=3}[]

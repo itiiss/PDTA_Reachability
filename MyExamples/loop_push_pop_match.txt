@@ -1,0 +1,42 @@
+system:loop_push_pop_match
+
+event:tau
+event:a
+event:b
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:q1a{}
+location:P:q1b{}
+location:P:q1c{}
+location:P:q1d{}
+location:P:q1{}
+location:P:q2{}
+location:P:q3{labels: error}
+
+# enter push phase, reset clocks
+edge:P:q0:q1a:tau{do: x=0;y=0}[]
+
+# force at least 4 pushes (each needs >=1 time unit)
+# diagonal guard: y - x <= 0 ensures y does not exceed x
+edge:P:q1a:q1b:a{provided: y>=1 && x<=6 && y-x<=0 : do: y=0}[push:a]
+edge:P:q1b:q1c:a{provided: y>=1 && x<=6 && y-x<=0 : do: y=0}[push:a]
+edge:P:q1c:q1d:a{provided: y>=1 && x<=6 && y-x<=0 : do: y=0}[push:a]
+edge:P:q1d:q1:a{provided: y>=1 && x<=6 && y-x<=0 : do: y=0}[push:a]
+
+# extra pushes allowed after the minimum
+edge:P:q1:q1:a{provided: y>=1 && x<=6 && y-x<=0 : do: y=0}[push:a]
+
+# move to pop phase after enough time, reset for pop budget
+edge:P:q1:q2:tau{provided: x>=4 : do: x=0;y=0}[]
+
+# pop loop: each pop needs >=1 time unit, total pop budget x<=6 (enough to match pushes)
+# diagonal guard: x - y <= 6 links pop pacing to elapsed time
+edge:P:q2:q2:b{provided: y>=1 && x-y<=6 : do: y=0}[pop:a<=0]
+
+# exit after pop window; q3 should be reachable with empty stack
+edge:P:q2:q3:tau{provided: x>6}[]

@@ -1,0 +1,26 @@
+system:diag_phase_tpda_bad
+
+event:tau
+event:call
+event:sw
+event:ret
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:qPush{}
+location:P:qPop{}
+location:P:qDone{labels: error}
+
+edge:P:q0:qPush:tau{do: x=0;y=0}[]
+edge:P:qPush:qPush:call{provided: x<=5}[push:s]
+
+# Here we switch too early: x-y will be frozen to 1, so the pop phase can
+# never satisfy the diagonal requirement x-y in [2,3].
+edge:P:qPush:qPop:sw{provided: x>=1 && x<=1 : do: y=0}[]
+
+edge:P:qPop:qPop:ret{provided: x-y>=2 && x-y<=3}[pop:s<=0]
+edge:P:qPop:qDone:tau{provided: x-y>=2 && x-y<=3}[]

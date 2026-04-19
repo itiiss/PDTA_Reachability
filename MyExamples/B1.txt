@@ -1,0 +1,28 @@
+system:B1
+
+clock:1:x
+clock:1:y
+
+event:a
+
+process:P
+location:P:q0{initial:}
+location:P:r1{}
+location:P:r2{}
+location:P:r3{}
+location:P:r4{}
+location:P:r5{}
+location:P:r6{}
+location:P:r7{}
+location:P:r8{}
+location:P:q1{}
+edge:P:q0:r1:a{}[push:a]
+edge:P:r1:r2:a{}[push:a]
+edge:P:r2:r3:a{}[push:a]
+edge:P:r3:r4:a{}[push:a]
+edge:P:r4:r5:a{}[push:a]
+edge:P:r5:r6:a{}[push:a]
+edge:P:r6:r7:a{}[push:a]
+edge:P:r7:r8:a{}[push:a]
+edge:P:r8:q1:a{provided: y<=10 : do: x=0}[pop:a<=2]
+edge:P:q1:q1:a{provided: x>=1 : do: x=0}[pop:a<=2]

@@ -1,0 +1,37 @@
+system:B3_3_4
+# system:<system_name>, <system_name> (name of automaton) can be written as a variable name with alphabets, numbers and underscores.
+clock:1:x
+# clock:1:<clock_name>, <clock_name> (name of the clock) needs to be unique and of the same format as system_name. This is different from TChecker clocks where we can have a list of clocks under a name, but here we have 1 as the second argument (clock:1), meaning we have only one clock under a single name.
+clock:1:y
+
+event:b2
+# event:<event_name>, <event_name> (name of the event) is of the same format as <system_name>. Each even must be unique. The total number of events we will be needing will be the maximum number of outgoing transitions from any state in the automata. <event_name> can be thought of as a symbol of the automaton, and the list of all events as the alphabet.
+event:b1
+event:a2
+event:a1
+event:a4
+event:a3
+
+process:P
+# process:<process_name>, <process_name> (name of the process) is of the same format as <system_name>. THERE CAN ONLY BE ONE PROCESS IN THE ENTIRE AUTOMATON.
+location:P:r2{}
+location:P:r1{}
+# location:<process_name>:<loc_name>{<arg>}: The <process_name> is unique so it must be the  for the entire automaton.The <loc_name> is the location name i.e. the NAME OF THE STATE. Since we have only one process, all <loc_name> must be unique. <arg> can either be empty, or "initial:" indicating it is the starting state. Since we explore the entire graph we don't have labels attached to locations in this format. Since we want to simulate PDTA, we also don't allow source invariants.
+location:P:q1{initial:}
+location:P:q2{}
+location:P:s1{}
+location:P:s2{}
+edge:P:q1:q2:a1{do: y=0 ; x=0  : provided: x==1 && y <=1}[push:a2]
+# edge:<process_name>:<src_loc_name>:<tgt_loc_name>:<event_name>{<timed_args>}[<stack_args>]:
+# <process_name> is unique so it must be the same as the entire automaton. <src_loc_name> is the source location name, and <tgt_loc_name> is the target location name. <event_name> is the symbol on which this transition is taken.
+# <timed_args> is "do : <resets> : provided: <guards>" or "provided : <guards> : do : <resets>". In case we have no resets "provided: <guards>", and no guards "do: <resets>". In case we have no resets and guards we can leave <timed_args> blank.
+# <guards>: List of guards, with all guards separated by a "&&". Each guard is of the form "<clock_name><comp><value>", with <clock_name> referring to the name of the clock on which the guard is, <comp> is the comparator (<,<=,>=,>,==), and <value> is an integer.
+# <resets>: List of resets with all resets reparated by a ";". Each reset is of the form "<clock_name>=0", with "<clock_name>" referring to the clock that is reset. We only reset each clock to 0 in this project.
+# <stack_args>: In case we have an NOP operation, we can keep this empty. In case we have a push operation it is to be written as "push:<symbol>", with <symbol> referring to the symbol that is pushed on the stack, it is of the same format as <system_name>. In case of pop operation we have, "pop:<symbol><comp><value>", with <symbol> referring to the value that is popped, <comp> referring to the comparator (<,<=,>=,>), and <value> being an integer. NOTE: BOTH <comp>, AND <value> ARE SIMPLY PLACEHOLDERS AND WILL BE IGNORED BY THE PROJECT. THESE ARE KEPT FOR FUTURE IMPLEMENTATION OF DENSE TIMED PUSH DOWN AUTOMATA TO PDTA REDUCTION.
+edge:P:q1:q1:a2{do: x=0}[push:a1]
+edge:P:q2:q2:a3{}[push:a]
+edge:P:q2:q2:a4{do: x=0}[push:a1]
+edge:P:q1:r1:b1{provided: x>=3}[pop:a1>=3]
+edge:P:q2:r2:b2{provided: x>=3}[pop:a1>=3]
+edge:P:r2:s2:a1{provided: y<=4}[pop:a<=4]
+edge:P:r2:s1:a2{provided: y<=4}[pop:a2<=4]

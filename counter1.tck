@@ -1,0 +1,10 @@
+system:CounterExample_PushLoop
+
+clock:1:x
+event:a
+
+process:P
+location:P:q0{initial:}
+
+# 只有 push 没有 pop，会导致栈深度无限增长
+edge:P:q0:q0:a{}[push:a]

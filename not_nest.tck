@@ -1,0 +1,28 @@
+system:NotWellNested_demo
+
+clock:1:x
+event:a
+
+process:P
+location:P:q0{initial:}
+location:P:push1{}
+location:P:push2{}
+location:P:pop1{}
+location:P:q_nested{}
+
+location:P:bad_push{}
+location:P:bad_pop{}
+location:P:q_bad{}
+
+# 一个良好嵌套的分支（push push pop pop）
+edge:P:q0:push1:a{}[push:a]
+edge:P:push1:push2:a{}[push:a]
+edge:P:push2:pop1:a{}[pop:a<=1]
+edge:P:pop1:q_nested:a{}[pop:a<=1]
+
+# 一个明显不良嵌套的分支：第二次 pop 时栈已经为空
+edge:P:q0:bad_push:a{}[push:a]
+edge:P:bad_push:bad_pop:a{}[pop:a<=1]
+edge:P:bad_pop:q_bad:a{}[pop:a<=1]
+
+

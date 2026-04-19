@@ -1,0 +1,26 @@
+system:B3_3_4
+clock:1:x
+clock:1:y
+
+event:b2
+event:b1
+event:a2
+event:a1
+event:a4
+event:a3
+
+process:P
+location:P:r2{}
+location:P:r1{}
+location:P:q1{initial:}
+location:P:q2{}
+location:P:s1{}
+location:P:s2{}
+edge:P:q1:q2:a1{do: y=0}[push:a2]
+edge:P:q1:q1:a2{do: x=0}[push:a1]
+edge:P:q2:q2:a3{}[push:a]
+edge:P:q2:q2:a4{do: x=0}[push:a1]
+edge:P:q1:r1:b1{provided: x>=3}[pop:a1>=3]
+edge:P:q2:r2:b2{provided: x>=3}[pop:a1>=3]
+edge:P:r2:s2:a1{provided: y<=4}[pop:a<=4]
+edge:P:r2:s1:a2{provided: y<=4}[pop:a2<=4]

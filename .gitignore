@@ -1,0 +1,61 @@
+# macOS/editor noise
+.DS_Store
+*~
+
+# CMake / CTest generated files
+build/
+build*/
+**/CMakeFiles/
+**/Testing/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/CTestTestfile.cmake
+**/install_manifest.txt
+**/CMakeDoxyfile.in
+**/CMakeDoxygenDefaults.cmake
+**/Makefile
+**/build.make
+**/cmake_clean.cmake
+**/cmake_clean_target.cmake
+**/DependInfo.cmake
+**/compiler_depend.make
+**/compiler_depend.ts
+**/compiler_depend.internal
+**/progress.make
+**/progress.marks
+**/TargetDirectories.txt
+**/CMakeDirectoryInformation.cmake
+**/CMakeRuleHashes.txt
+**/cmake.check_cache
+**/flags.make
+**/link.txt
+**/defer*.cmake
+
+# Compiler and dependency outputs
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.tmp
+*.d
+*.o.d
+*.gcno
+*.gcda
+
+# Generated configuration / docs
+include/tchecker/config.hh
+html/
+doc/html/
+src/html/
+
+# Local-only material: generated tests, logs, scratch copies
+test/
+*.log
+* 2.md
+* 2.tex
+* 2.tck
+* 2.log

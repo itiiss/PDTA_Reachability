@@ -1,0 +1,21 @@
+system:B10
+
+clock:1:x
+clock:1:y
+clock:1:z
+
+event:a
+event:b
+event:c
+
+process:P
+location:P:q1{initial:}
+location:P:q2{}
+location:P:q3{}
+location:P:q4{}
+edge:P:q1:q1:a{do: x=0 : provided: x>1}[push:a]
+edge:P:q1:q1:b{do: y=0 : provided: y<2}[push:b]
+edge:P:q1:q2:c{provided: x==0 && z==4}[]
+edge:P:q2:q3:a{}[pop:a<=2]
+edge:P:q3:q2:a{}[pop:b<=2]
+edge:P:q2:q4:b{}[]

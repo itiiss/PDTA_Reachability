@@ -1,0 +1,23 @@
+system:state_local_lu
+
+event:tau
+
+process:P
+
+clock:1:x
+int:1:0:5:0:n
+
+location:P:q0{initial:}
+location:P:set1{}
+location:P:set5{}
+location:P:q{}
+location:P:qerr{labels: error}
+
+# same control location q can be reached with different integer valuations
+edge:P:q0:set1:tau{do: n=1; x=0}[]
+edge:P:q0:set5:tau{do: n=5; x=0}[]
+edge:P:set1:q:tau{}[]
+edge:P:set5:q:tau{}[]
+
+# the enabled simple guards at q depend on n, hence LU(G(q)) depends on intvars
+edge:P:q:qerr:tau{provided: x>=3 && x<=n}[]

@@ -1,0 +1,24 @@
+system:diag_subsumption_small_reordered
+
+event:tau
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:qprep{}
+location:P:q{}
+location:P:qcoarse{}
+location:P:qdone{labels: error}
+
+edge:P:q0:qprep:tau{do: x=0;y=0}[]
+edge:P:qprep:q:tau{provided: x==1 : do: y=0}[]
+
+edge:P:q:qcoarse:tau{do: x=0;y=0}[]
+edge:P:qcoarse:q:tau{provided: x>=1 && x<=2 : do: y=0}[]
+
+# Same diagonal condition as diag_subsumption_small, but written together with
+# a redundant simple conjunct and in a different conjunct order.
+edge:P:q:qdone:tau{provided: x<=3 && x-y<=1}[]

@@ -1,0 +1,513 @@
+system:B5_100_10
+
+clock:1:x
+clock:1:y
+
+event:a
+event:b
+
+process:P
+location:P:q0{initial:}
+location:P:q1{}
+location:P:qp1{}
+location:P:q2{}
+location:P:qp2{}
+location:P:q3{}
+location:P:qp3{}
+location:P:q4{}
+location:P:qp4{}
+location:P:q5{}
+location:P:qp5{}
+location:P:q6{}
+location:P:qp6{}
+location:P:q7{}
+location:P:qp7{}
+location:P:q8{}
+location:P:qp8{}
+location:P:q9{}
+location:P:qp9{}
+location:P:q10{}
+location:P:qp10{}
+location:P:q11{}
+location:P:qp11{}
+location:P:q12{}
+location:P:qp12{}
+location:P:q13{}
+location:P:qp13{}
+location:P:q14{}
+location:P:qp14{}
+location:P:q15{}
+location:P:qp15{}
+location:P:q16{}
+location:P:qp16{}
+location:P:q17{}
+location:P:qp17{}
+location:P:q18{}
+location:P:qp18{}
+location:P:q19{}
+location:P:qp19{}
+location:P:q20{}
+location:P:qp20{}
+location:P:q21{}
+location:P:qp21{}
+location:P:q22{}
+location:P:qp22{}
+location:P:q23{}
+location:P:qp23{}
+location:P:q24{}
+location:P:qp24{}
+location:P:q25{}
+location:P:qp25{}
+location:P:q26{}
+location:P:qp26{}
+location:P:q27{}
+location:P:qp27{}
+location:P:q28{}
+location:P:qp28{}
+location:P:q29{}
+location:P:qp29{}
+location:P:q30{}
+location:P:qp30{}
+location:P:q31{}
+location:P:qp31{}
+location:P:q32{}
+location:P:qp32{}
+location:P:q33{}
+location:P:qp33{}
+location:P:q34{}
+location:P:qp34{}
+location:P:q35{}
+location:P:qp35{}
+location:P:q36{}
+location:P:qp36{}
+location:P:q37{}
+location:P:qp37{}
+location:P:q38{}
+location:P:qp38{}
+location:P:q39{}
+location:P:qp39{}
+location:P:q40{}
+location:P:qp40{}
+location:P:q41{}
+location:P:qp41{}
+location:P:q42{}
+location:P:qp42{}
+location:P:q43{}
+location:P:qp43{}
+location:P:q44{}
+location:P:qp44{}
+location:P:q45{}
+location:P:qp45{}
+location:P:q46{}
+location:P:qp46{}
+location:P:q47{}
+location:P:qp47{}
+location:P:q48{}
+location:P:qp48{}
+location:P:q49{}
+location:P:qp49{}
+location:P:q50{}
+location:P:qp50{}
+location:P:q51{}
+location:P:qp51{}
+location:P:q52{}
+location:P:qp52{}
+location:P:q53{}
+location:P:qp53{}
+location:P:q54{}
+location:P:qp54{}
+location:P:q55{}
+location:P:qp55{}
+location:P:q56{}
+location:P:qp56{}
+location:P:q57{}
+location:P:qp57{}
+location:P:q58{}
+location:P:qp58{}
+location:P:q59{}
+location:P:qp59{}
+location:P:q60{}
+location:P:qp60{}
+location:P:q61{}
+location:P:qp61{}
+location:P:q62{}
+location:P:qp62{}
+location:P:q63{}
+location:P:qp63{}
+location:P:q64{}
+location:P:qp64{}
+location:P:q65{}
+location:P:qp65{}
+location:P:q66{}
+location:P:qp66{}
+location:P:q67{}
+location:P:qp67{}
+location:P:q68{}
+location:P:qp68{}
+location:P:q69{}
+location:P:qp69{}
+location:P:q70{}
+location:P:qp70{}
+location:P:q71{}
+location:P:qp71{}
+location:P:q72{}
+location:P:qp72{}
+location:P:q73{}
+location:P:qp73{}
+location:P:q74{}
+location:P:qp74{}
+location:P:q75{}
+location:P:qp75{}
+location:P:q76{}
+location:P:qp76{}
+location:P:q77{}
+location:P:qp77{}
+location:P:q78{}
+location:P:qp78{}
+location:P:q79{}
+location:P:qp79{}
+location:P:q80{}
+location:P:qp80{}
+location:P:q81{}
+location:P:qp81{}
+location:P:q82{}
+location:P:qp82{}
+location:P:q83{}
+location:P:qp83{}
+location:P:q84{}
+location:P:qp84{}
+location:P:q85{}
+location:P:qp85{}
+location:P:q86{}
+location:P:qp86{}
+location:P:q87{}
+location:P:qp87{}
+location:P:q88{}
+location:P:qp88{}
+location:P:q89{}
+location:P:qp89{}
+location:P:q90{}
+location:P:qp90{}
+location:P:q91{}
+location:P:qp91{}
+location:P:q92{}
+location:P:qp92{}
+location:P:q93{}
+location:P:qp93{}
+location:P:q94{}
+location:P:qp94{}
+location:P:q95{}
+location:P:qp95{}
+location:P:q96{}
+location:P:qp96{}
+location:P:q97{}
+location:P:qp97{}
+location:P:q98{}
+location:P:qp98{}
+location:P:q99{}
+location:P:qp99{}
+location:P:q100{}
+location:P:qp100{}
+location:P:fin{}
+edge:P:q0:q1:a{}[push:a]
+edge:P:q1:qp1:a{provided:x>=1 : do: x=0}[]
+edge:P:qp1:q1:a{provided:y<=10}[]
+edge:P:qp1:q2:b{do: x=0 ; y=0}[push:a]
+edge:P:q2:qp2:a{provided:x>=1 : do: x=0}[]
+edge:P:qp2:q2:a{provided:y<=10}[]
+edge:P:qp2:q3:b{do: x=0 ; y=0}[push:a]
+edge:P:q3:qp3:a{provided:x>=1 : do: x=0}[]
+edge:P:qp3:q3:a{provided:y<=10}[]
+edge:P:qp3:q4:b{do: x=0 ; y=0}[push:a]
+edge:P:q4:qp4:a{provided:x>=1 : do: x=0}[]
+edge:P:qp4:q4:a{provided:y<=10}[]
+edge:P:qp4:q5:b{do: x=0 ; y=0}[push:a]
+edge:P:q5:qp5:a{provided:x>=1 : do: x=0}[]
+edge:P:qp5:q5:a{provided:y<=10}[]
+edge:P:qp5:q6:b{do: x=0 ; y=0}[push:a]
+edge:P:q6:qp6:a{provided:x>=1 : do: x=0}[]
+edge:P:qp6:q6:a{provided:y<=10}[]
+edge:P:qp6:q7:b{do: x=0 ; y=0}[push:a]
+edge:P:q7:qp7:a{provided:x>=1 : do: x=0}[]
+edge:P:qp7:q7:a{provided:y<=10}[]
+edge:P:qp7:q8:b{do: x=0 ; y=0}[push:a]
+edge:P:q8:qp8:a{provided:x>=1 : do: x=0}[]
+edge:P:qp8:q8:a{provided:y<=10}[]
+edge:P:qp8:q9:b{do: x=0 ; y=0}[push:a]
+edge:P:q9:qp9:a{provided:x>=1 : do: x=0}[]
+edge:P:qp9:q9:a{provided:y<=10}[]
+edge:P:qp9:q10:b{do: x=0 ; y=0}[push:a]
+edge:P:q10:qp10:a{provided:x>=1 : do: x=0}[]
+edge:P:qp10:q10:a{provided:y<=10}[]
+edge:P:qp10:q11:b{do: x=0 ; y=0}[push:a]
+edge:P:q11:qp11:a{provided:x>=1 : do: x=0}[]
+edge:P:qp11:q11:a{provided:y<=10}[]
+edge:P:qp11:q12:b{do: x=0 ; y=0}[push:a]
+edge:P:q12:qp12:a{provided:x>=1 : do: x=0}[]
+edge:P:qp12:q12:a{provided:y<=10}[]
+edge:P:qp12:q13:b{do: x=0 ; y=0}[push:a]
+edge:P:q13:qp13:a{provided:x>=1 : do: x=0}[]
+edge:P:qp13:q13:a{provided:y<=10}[]
+edge:P:qp13:q14:b{do: x=0 ; y=0}[push:a]
+edge:P:q14:qp14:a{provided:x>=1 : do: x=0}[]
+edge:P:qp14:q14:a{provided:y<=10}[]
+edge:P:qp14:q15:b{do: x=0 ; y=0}[push:a]
+edge:P:q15:qp15:a{provided:x>=1 : do: x=0}[]
+edge:P:qp15:q15:a{provided:y<=10}[]
+edge:P:qp15:q16:b{do: x=0 ; y=0}[push:a]
+edge:P:q16:qp16:a{provided:x>=1 : do: x=0}[]
+edge:P:qp16:q16:a{provided:y<=10}[]
+edge:P:qp16:q17:b{do: x=0 ; y=0}[push:a]
+edge:P:q17:qp17:a{provided:x>=1 : do: x=0}[]
+edge:P:qp17:q17:a{provided:y<=10}[]
+edge:P:qp17:q18:b{do: x=0 ; y=0}[push:a]
+edge:P:q18:qp18:a{provided:x>=1 : do: x=0}[]
+edge:P:qp18:q18:a{provided:y<=10}[]
+edge:P:qp18:q19:b{do: x=0 ; y=0}[push:a]
+edge:P:q19:qp19:a{provided:x>=1 : do: x=0}[]
+edge:P:qp19:q19:a{provided:y<=10}[]
+edge:P:qp19:q20:b{do: x=0 ; y=0}[push:a]
+edge:P:q20:qp20:a{provided:x>=1 : do: x=0}[]
+edge:P:qp20:q20:a{provided:y<=10}[]
+edge:P:qp20:q21:b{do: x=0 ; y=0}[push:a]
+edge:P:q21:qp21:a{provided:x>=1 : do: x=0}[]
+edge:P:qp21:q21:a{provided:y<=10}[]
+edge:P:qp21:q22:b{do: x=0 ; y=0}[push:a]
+edge:P:q22:qp22:a{provided:x>=1 : do: x=0}[]
+edge:P:qp22:q22:a{provided:y<=10}[]
+edge:P:qp22:q23:b{do: x=0 ; y=0}[push:a]
+edge:P:q23:qp23:a{provided:x>=1 : do: x=0}[]
+edge:P:qp23:q23:a{provided:y<=10}[]
+edge:P:qp23:q24:b{do: x=0 ; y=0}[push:a]
+edge:P:q24:qp24:a{provided:x>=1 : do: x=0}[]
+edge:P:qp24:q24:a{provided:y<=10}[]
+edge:P:qp24:q25:b{do: x=0 ; y=0}[push:a]
+edge:P:q25:qp25:a{provided:x>=1 : do: x=0}[]
+edge:P:qp25:q25:a{provided:y<=10}[]
+edge:P:qp25:q26:b{do: x=0 ; y=0}[push:a]
+edge:P:q26:qp26:a{provided:x>=1 : do: x=0}[]
+edge:P:qp26:q26:a{provided:y<=10}[]
+edge:P:qp26:q27:b{do: x=0 ; y=0}[push:a]
+edge:P:q27:qp27:a{provided:x>=1 : do: x=0}[]
+edge:P:qp27:q27:a{provided:y<=10}[]
+edge:P:qp27:q28:b{do: x=0 ; y=0}[push:a]
+edge:P:q28:qp28:a{provided:x>=1 : do: x=0}[]
+edge:P:qp28:q28:a{provided:y<=10}[]
+edge:P:qp28:q29:b{do: x=0 ; y=0}[push:a]
+edge:P:q29:qp29:a{provided:x>=1 : do: x=0}[]
+edge:P:qp29:q29:a{provided:y<=10}[]
+edge:P:qp29:q30:b{do: x=0 ; y=0}[push:a]
+edge:P:q30:qp30:a{provided:x>=1 : do: x=0}[]
+edge:P:qp30:q30:a{provided:y<=10}[]
+edge:P:qp30:q31:b{do: x=0 ; y=0}[push:a]
+edge:P:q31:qp31:a{provided:x>=1 : do: x=0}[]
+edge:P:qp31:q31:a{provided:y<=10}[]
+edge:P:qp31:q32:b{do: x=0 ; y=0}[push:a]
+edge:P:q32:qp32:a{provided:x>=1 : do: x=0}[]
+edge:P:qp32:q32:a{provided:y<=10}[]
+edge:P:qp32:q33:b{do: x=0 ; y=0}[push:a]
+edge:P:q33:qp33:a{provided:x>=1 : do: x=0}[]
+edge:P:qp33:q33:a{provided:y<=10}[]
+edge:P:qp33:q34:b{do: x=0 ; y=0}[push:a]
+edge:P:q34:qp34:a{provided:x>=1 : do: x=0}[]
+edge:P:qp34:q34:a{provided:y<=10}[]
+edge:P:qp34:q35:b{do: x=0 ; y=0}[push:a]
+edge:P:q35:qp35:a{provided:x>=1 : do: x=0}[]
+edge:P:qp35:q35:a{provided:y<=10}[]
+edge:P:qp35:q36:b{do: x=0 ; y=0}[push:a]
+edge:P:q36:qp36:a{provided:x>=1 : do: x=0}[]
+edge:P:qp36:q36:a{provided:y<=10}[]
+edge:P:qp36:q37:b{do: x=0 ; y=0}[push:a]
+edge:P:q37:qp37:a{provided:x>=1 : do: x=0}[]
+edge:P:qp37:q37:a{provided:y<=10}[]
+edge:P:qp37:q38:b{do: x=0 ; y=0}[push:a]
+edge:P:q38:qp38:a{provided:x>=1 : do: x=0}[]
+edge:P:qp38:q38:a{provided:y<=10}[]
+edge:P:qp38:q39:b{do: x=0 ; y=0}[push:a]
+edge:P:q39:qp39:a{provided:x>=1 : do: x=0}[]
+edge:P:qp39:q39:a{provided:y<=10}[]
+edge:P:qp39:q40:b{do: x=0 ; y=0}[push:a]
+edge:P:q40:qp40:a{provided:x>=1 : do: x=0}[]
+edge:P:qp40:q40:a{provided:y<=10}[]
+edge:P:qp40:q41:b{do: x=0 ; y=0}[push:a]
+edge:P:q41:qp41:a{provided:x>=1 : do: x=0}[]
+edge:P:qp41:q41:a{provided:y<=10}[]
+edge:P:qp41:q42:b{do: x=0 ; y=0}[push:a]
+edge:P:q42:qp42:a{provided:x>=1 : do: x=0}[]
+edge:P:qp42:q42:a{provided:y<=10}[]
+edge:P:qp42:q43:b{do: x=0 ; y=0}[push:a]
+edge:P:q43:qp43:a{provided:x>=1 : do: x=0}[]
+edge:P:qp43:q43:a{provided:y<=10}[]
+edge:P:qp43:q44:b{do: x=0 ; y=0}[push:a]
+edge:P:q44:qp44:a{provided:x>=1 : do: x=0}[]
+edge:P:qp44:q44:a{provided:y<=10}[]
+edge:P:qp44:q45:b{do: x=0 ; y=0}[push:a]
+edge:P:q45:qp45:a{provided:x>=1 : do: x=0}[]
+edge:P:qp45:q45:a{provided:y<=10}[]
+edge:P:qp45:q46:b{do: x=0 ; y=0}[push:a]
+edge:P:q46:qp46:a{provided:x>=1 : do: x=0}[]
+edge:P:qp46:q46:a{provided:y<=10}[]
+edge:P:qp46:q47:b{do: x=0 ; y=0}[push:a]
+edge:P:q47:qp47:a{provided:x>=1 : do: x=0}[]
+edge:P:qp47:q47:a{provided:y<=10}[]
+edge:P:qp47:q48:b{do: x=0 ; y=0}[push:a]
+edge:P:q48:qp48:a{provided:x>=1 : do: x=0}[]
+edge:P:qp48:q48:a{provided:y<=10}[]
+edge:P:qp48:q49:b{do: x=0 ; y=0}[push:a]
+edge:P:q49:qp49:a{provided:x>=1 : do: x=0}[]
+edge:P:qp49:q49:a{provided:y<=10}[]
+edge:P:qp49:q50:b{do: x=0 ; y=0}[push:a]
+edge:P:q50:qp50:a{provided:x>=1 : do: x=0}[]
+edge:P:qp50:q50:a{provided:y<=10}[]
+edge:P:qp50:q51:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q51:qp51:a{provided:x>=1 : do: x=0}[]
+edge:P:qp51:q51:a{provided:y<=10}[]
+edge:P:qp51:q52:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q52:qp52:a{provided:x>=1 : do: x=0}[]
+edge:P:qp52:q52:a{provided:y<=10}[]
+edge:P:qp52:q53:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q53:qp53:a{provided:x>=1 : do: x=0}[]
+edge:P:qp53:q53:a{provided:y<=10}[]
+edge:P:qp53:q54:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q54:qp54:a{provided:x>=1 : do: x=0}[]
+edge:P:qp54:q54:a{provided:y<=10}[]
+edge:P:qp54:q55:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q55:qp55:a{provided:x>=1 : do: x=0}[]
+edge:P:qp55:q55:a{provided:y<=10}[]
+edge:P:qp55:q56:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q56:qp56:a{provided:x>=1 : do: x=0}[]
+edge:P:qp56:q56:a{provided:y<=10}[]
+edge:P:qp56:q57:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q57:qp57:a{provided:x>=1 : do: x=0}[]
+edge:P:qp57:q57:a{provided:y<=10}[]
+edge:P:qp57:q58:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q58:qp58:a{provided:x>=1 : do: x=0}[]
+edge:P:qp58:q58:a{provided:y<=10}[]
+edge:P:qp58:q59:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q59:qp59:a{provided:x>=1 : do: x=0}[]
+edge:P:qp59:q59:a{provided:y<=10}[]
+edge:P:qp59:q60:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q60:qp60:a{provided:x>=1 : do: x=0}[]
+edge:P:qp60:q60:a{provided:y<=10}[]
+edge:P:qp60:q61:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q61:qp61:a{provided:x>=1 : do: x=0}[]
+edge:P:qp61:q61:a{provided:y<=10}[]
+edge:P:qp61:q62:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q62:qp62:a{provided:x>=1 : do: x=0}[]
+edge:P:qp62:q62:a{provided:y<=10}[]
+edge:P:qp62:q63:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q63:qp63:a{provided:x>=1 : do: x=0}[]
+edge:P:qp63:q63:a{provided:y<=10}[]
+edge:P:qp63:q64:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q64:qp64:a{provided:x>=1 : do: x=0}[]
+edge:P:qp64:q64:a{provided:y<=10}[]
+edge:P:qp64:q65:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q65:qp65:a{provided:x>=1 : do: x=0}[]
+edge:P:qp65:q65:a{provided:y<=10}[]
+edge:P:qp65:q66:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q66:qp66:a{provided:x>=1 : do: x=0}[]
+edge:P:qp66:q66:a{provided:y<=10}[]
+edge:P:qp66:q67:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q67:qp67:a{provided:x>=1 : do: x=0}[]
+edge:P:qp67:q67:a{provided:y<=10}[]
+edge:P:qp67:q68:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q68:qp68:a{provided:x>=1 : do: x=0}[]
+edge:P:qp68:q68:a{provided:y<=10}[]
+edge:P:qp68:q69:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q69:qp69:a{provided:x>=1 : do: x=0}[]
+edge:P:qp69:q69:a{provided:y<=10}[]
+edge:P:qp69:q70:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q70:qp70:a{provided:x>=1 : do: x=0}[]
+edge:P:qp70:q70:a{provided:y<=10}[]
+edge:P:qp70:q71:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q71:qp71:a{provided:x>=1 : do: x=0}[]
+edge:P:qp71:q71:a{provided:y<=10}[]
+edge:P:qp71:q72:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q72:qp72:a{provided:x>=1 : do: x=0}[]
+edge:P:qp72:q72:a{provided:y<=10}[]
+edge:P:qp72:q73:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q73:qp73:a{provided:x>=1 : do: x=0}[]
+edge:P:qp73:q73:a{provided:y<=10}[]
+edge:P:qp73:q74:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q74:qp74:a{provided:x>=1 : do: x=0}[]
+edge:P:qp74:q74:a{provided:y<=10}[]
+edge:P:qp74:q75:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q75:qp75:a{provided:x>=1 : do: x=0}[]
+edge:P:qp75:q75:a{provided:y<=10}[]
+edge:P:qp75:q76:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q76:qp76:a{provided:x>=1 : do: x=0}[]
+edge:P:qp76:q76:a{provided:y<=10}[]
+edge:P:qp76:q77:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q77:qp77:a{provided:x>=1 : do: x=0}[]
+edge:P:qp77:q77:a{provided:y<=10}[]
+edge:P:qp77:q78:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q78:qp78:a{provided:x>=1 : do: x=0}[]
+edge:P:qp78:q78:a{provided:y<=10}[]
+edge:P:qp78:q79:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q79:qp79:a{provided:x>=1 : do: x=0}[]
+edge:P:qp79:q79:a{provided:y<=10}[]
+edge:P:qp79:q80:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q80:qp80:a{provided:x>=1 : do: x=0}[]
+edge:P:qp80:q80:a{provided:y<=10}[]
+edge:P:qp80:q81:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q81:qp81:a{provided:x>=1 : do: x=0}[]
+edge:P:qp81:q81:a{provided:y<=10}[]
+edge:P:qp81:q82:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q82:qp82:a{provided:x>=1 : do: x=0}[]
+edge:P:qp82:q82:a{provided:y<=10}[]
+edge:P:qp82:q83:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q83:qp83:a{provided:x>=1 : do: x=0}[]
+edge:P:qp83:q83:a{provided:y<=10}[]
+edge:P:qp83:q84:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q84:qp84:a{provided:x>=1 : do: x=0}[]
+edge:P:qp84:q84:a{provided:y<=10}[]
+edge:P:qp84:q85:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q85:qp85:a{provided:x>=1 : do: x=0}[]
+edge:P:qp85:q85:a{provided:y<=10}[]
+edge:P:qp85:q86:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q86:qp86:a{provided:x>=1 : do: x=0}[]
+edge:P:qp86:q86:a{provided:y<=10}[]
+edge:P:qp86:q87:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q87:qp87:a{provided:x>=1 : do: x=0}[]
+edge:P:qp87:q87:a{provided:y<=10}[]
+edge:P:qp87:q88:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q88:qp88:a{provided:x>=1 : do: x=0}[]
+edge:P:qp88:q88:a{provided:y<=10}[]
+edge:P:qp88:q89:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q89:qp89:a{provided:x>=1 : do: x=0}[]
+edge:P:qp89:q89:a{provided:y<=10}[]
+edge:P:qp89:q90:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q90:qp90:a{provided:x>=1 : do: x=0}[]
+edge:P:qp90:q90:a{provided:y<=10}[]
+edge:P:qp90:q91:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q91:qp91:a{provided:x>=1 : do: x=0}[]
+edge:P:qp91:q91:a{provided:y<=10}[]
+edge:P:qp91:q92:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q92:qp92:a{provided:x>=1 : do: x=0}[]
+edge:P:qp92:q92:a{provided:y<=10}[]
+edge:P:qp92:q93:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q93:qp93:a{provided:x>=1 : do: x=0}[]
+edge:P:qp93:q93:a{provided:y<=10}[]
+edge:P:qp93:q94:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q94:qp94:a{provided:x>=1 : do: x=0}[]
+edge:P:qp94:q94:a{provided:y<=10}[]
+edge:P:qp94:q95:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q95:qp95:a{provided:x>=1 : do: x=0}[]
+edge:P:qp95:q95:a{provided:y<=10}[]
+edge:P:qp95:q96:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q96:qp96:a{provided:x>=1 : do: x=0}[]
+edge:P:qp96:q96:a{provided:y<=10}[]
+edge:P:qp96:q97:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q97:qp97:a{provided:x>=1 : do: x=0}[]
+edge:P:qp97:q97:a{provided:y<=10}[]
+edge:P:qp97:q98:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q98:qp98:a{provided:x>=1 : do: x=0}[]
+edge:P:qp98:q98:a{provided:y<=10}[]
+edge:P:qp98:q99:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q99:qp99:a{provided:x>=1 : do: x=0}[]
+edge:P:qp99:q99:a{provided:y<=10}[]
+edge:P:qp99:q100:b{do: x=0 ; y=0}[pop:a<=2]
+edge:P:q100:qp100:a{provided:x>=1 : do: x=0}[]
+edge:P:qp100:q100:a{provided:y<=10}[]
+edge:P:q100:fin:b{}[]
+

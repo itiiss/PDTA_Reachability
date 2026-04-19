@@ -1,0 +1,15 @@
+system:CounterExample_IncreasingDelay
+
+clock:1:x
+int:1:0:2147483647:0:delay
+event:a
+
+process:P
+location:P:q0{initial:}
+location:P:q1{}
+location:P:q2{}
+
+# 每次 push 都会把 delay 自增，下一次 pop 需要更长时间
+edge:P:q0:q1:a{provided: delay==0 : do: delay=1 ; x=0}[push:a]
+edge:P:q1:q2:a{provided: x>=delay : do: delay=delay+1 ; x=0}[push:a]
+edge:P:q2:q0:a{}[pop:a<=0]

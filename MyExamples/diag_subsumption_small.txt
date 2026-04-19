@@ -1,0 +1,26 @@
+system:diag_subsumption_small
+
+event:tau
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:qprep{}
+location:P:q{}
+location:P:qcoarse{}
+location:P:qdone{labels: error}
+
+# First build a precise zone at q where x-y is fixed to 1.
+edge:P:q0:qprep:tau{do: x=0;y=0}[]
+edge:P:qprep:q:tau{provided: x==1 : do: y=0}[]
+
+# Then come back to q through a wider branch that only guarantees 1<=x-y<=2.
+edge:P:q:qcoarse:tau{do: x=0;y=0}[]
+edge:P:qcoarse:q:tau{provided: x>=1 && x<=2 : do: y=0}[]
+
+# The only guard collected from q is diagonal, so the sim/eq difference comes
+# from diagonal implication rather than push/pop structure.
+edge:P:q:qdone:tau{provided: x-y<=1}[]

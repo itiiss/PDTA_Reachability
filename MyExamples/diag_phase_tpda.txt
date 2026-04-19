@@ -1,0 +1,36 @@
+system:diag_phase_tpda
+
+event:tau
+event:call
+event:sw
+event:ret
+
+process:P
+
+clock:1:x
+clock:1:y
+
+location:P:q0{initial:}
+location:P:qPush{}
+location:P:qPop{}
+location:P:qDone{labels: error}
+
+# Start a global phase clock x. Clock y will be reset when we switch from
+# the push phase to the pop phase.
+edge:P:q0:qPush:tau{do: x=0;y=0}[]
+
+# Arbitrarily many nested calls can be pushed while we stay in the push phase.
+edge:P:qPush:qPush:call{provided: x<=5}[push:s]
+
+# Switch to the pop phase only after 2..3 time units.
+# After this reset, x-y is exactly the duration of the push phase.
+edge:P:qPush:qPop:sw{provided: x>=2 && x<=3 : do: y=0}[]
+
+# During the whole pop phase, x and y evolve together, so x-y keeps the value
+# "time spent before switching". The pop is therefore enabled iff the push
+# phase lasted 2..3 time units.
+edge:P:qPop:qPop:ret{provided: x-y>=2 && x-y<=3}[pop:s<=0]
+
+# Once the stack is empty, the final state is reachable under the same
+# diagonal condition.
+edge:P:qPop:qDone:tau{provided: x-y>=2 && x-y<=3}[]

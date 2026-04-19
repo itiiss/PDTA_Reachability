@@ -1,0 +1,20 @@
+system:state_local_lu_only5
+
+event:tau
+
+process:P
+
+clock:1:x
+int:1:0:5:0:n
+
+location:P:q0{initial:}
+location:P:set5{}
+location:P:q{}
+location:P:qerr{labels: error}
+
+# Same control structure as state_local_lu_only1, but only n=5.
+edge:P:q0:set5:tau{do: n=5; x=0}[]
+edge:P:set5:q:tau{}[]
+
+# Same simple guard shape as before; here qerr is reachable.
+edge:P:q:qerr:tau{provided: x>=3 && x<=n}[]

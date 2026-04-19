@@ -1,0 +1,82 @@
+system:loop_push_pop_match
+
+event:tau
+event:a
+event:b
+event:done
+
+process:P
+
+clock:1:x
+clock:1:y
+clock:1:z
+
+location:P:q0{initial:}
+location:P:qWork{}
+location:P:qLate{}
+location:P:qDrain{}
+location:P:qFinal{}
+location:P:qErr{labels: error}
+
+# init
+edge:P:q0:qWork:tau{do: x=0;y=0;z=0}[]
+
+# -----------------------------
+# Work phase: push/pop 都是自环，可反复做（不设显式次数上界）
+# x: 从进入 work 以来的总时间（不重置）
+# y: 自上次 push 以来的时间（push 时重置）
+# z: 自上次 pop 以来的时间（pop 时重置）
+# -----------------------------
+
+# push loop: 每次 push 至少隔 1 时间单位
+# diagonal: y - z <= 1  (push 不能比 pop 落后太多)
+edge:P:qWork:qWork:a{
+  provided: y>=1 && y-z<=1
+  : do: y=0
+}[push:a]
+
+# pop loop: 匹配 pop 一个 a；每次 pop 至少隔 1 时间单位
+# 关键对角线：z - y <= 1  (pop 不能比 push 落后太多)
+edge:P:qWork:qWork:b{
+  provided: z>=1 && z-y<=1
+  : do: z=0
+}[pop:a<=0]
+
+# -----------------------------
+# Switch to late-push phase:
+# 必须在 x>=5 时进入“后期”，这里仍可无限 push
+# 且要求刚刚 push 过、但 pop 已经很久没有发生
+# 注意：x 不重置，继续作为“从开始工作起的总时间”
+# -----------------------------
+edge:P:qWork:qLate:done{provided: x>=5 && y<=1 && z>=3 : do: y=0}[]
+
+# -----------------------------
+# Late phase: 只能 push（保证进入 drain 前至少再 push 一次）
+# -----------------------------
+edge:P:qLate:qLate:a{
+  provided: y>=1 && y-z<=1
+  : do: y=0
+}[push:a]
+
+edge:P:qLate:qDrain:done{provided: x>=6 && y<=1 && z>=3 : do: y=0}[]
+
+# -----------------------------
+# Drain phase: 只能 pop，但对角线让 pop 只能发生很有限次
+# 关键点：进入时 x 已经较大，x-z<=1 使得 z 追不上 x
+# -----------------------------
+
+# pop loop (drain):
+# 需要 y>=1（每次 pop 至少隔 1）
+# 且 x - y <= 1  (更严格的对角线)
+# 因为 x 在 qDrain 里持续增长，但 y 每次 pop 后重置为 0，
+# 所以你最多只能在进入 qDrain 后的非常短时间里做少量 pop
+edge:P:qDrain:qDrain:b{
+  provided: z>=1 && x-z<=1
+  : do: z=0
+}[pop:a<=0]
+
+# attempt to finish: 只有栈空时才允许 pop-match 系统通过这个 tau（语义上：空栈才能“完成匹配”）
+edge:P:qDrain:qFinal:tau{provided: x>=7}[]
+
+# 超时转 error（表示：到 x>7 时仍收尾失败）
+edge:P:qDrain:qErr:tau{provided: x>7}[]

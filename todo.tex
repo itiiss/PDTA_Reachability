@@ -1,0 +1,283 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{finiteness of G-simulation}
+\author{chen zhao}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================
+% Meeting-style explanation for advisor discussion
+% PDTA termination with G-simulation (diagonal constraints)
+% Based strictly on:
+%   [PDTA] https://arxiv.org/pdf/2105.13683
+%   [GAbs] https://arxiv.org/pdf/1904.08590
+% ============================================================
+
+\section*{Termination of PDTA Reachability with G-simulation}
+
+\paragraph{Goal of the discussion.}
+I want to explain why the PDTA reachability algorithm
+terminates when we replace LU-extrapolation by
+\emph{G-simulation} in order to support diagonal constraints.
+
+The key point is to show that the simulation relation used for
+subsumption induces a \emph{finite symbolic state space},
+so that the saturation algorithm must stop.
+
+\vspace{1ex}
+The argument follows exactly the structure of:
+\begin{itemize}
+  \item the PDTA termination theorem (Theorem~3 in~\cite{PDTA}), and
+  \item the finiteness proof of G-simulation in~\cite{GAbs}.
+\end{itemize}
+
+% ------------------------------------------------------------
+
+\subsection*{1. What ``finite'' means in the PDTA algorithm}
+
+In the PDTA paper, symbolic states are pairs $(q,Z)$
+(control state + zone).
+The algorithm explores these states using inference rules.
+
+There are two critical finiteness requirements:
+
+\begin{enumerate}
+  \item The set of \emph{roots} $S^\star$ must be finite.
+  \item For each root $(q,Z)$, the local exploration set $S(q,Z)$
+        must be finite.
+\end{enumerate}
+
+This is exactly Theorem~3(1) in~\cite{PDTA}.
+
+The PDTA proof shows:
+\begin{itemize}
+  \item Root finiteness follows if the simulation equivalence
+        $\sim$ has \emph{finite index} (called \emph{strong finiteness}).
+  \item Local finiteness follows if the simulation preorder
+        $\preceq$ is a \emph{finite simulation}.
+\end{itemize}
+
+So the whole question reduces to:
+\begin{quote}
+\emph{Why is G-simulation finite (and strongly finite) when diagonal
+constraints are allowed?}
+\end{quote}
+
+% ------------------------------------------------------------
+
+\subsection*{2. High-level idea of G-simulation}
+
+The difficulty is that diagonal constraints break classical
+LU-extrapolation: $4_{LU}$ is no longer a simulation.
+
+The solution proposed in~\cite{GAbs} is:
+\begin{itemize}
+  \item Use \emph{state-based guard sets} $G(q)$,
+  \item Define a simulation that combines:
+    \begin{enumerate}
+      \item LU-style simulation for non-diagonal constraints, and
+      \item implication checking for diagonal constraints.
+    \end{enumerate}
+\end{itemize}
+
+This gives a simulation that is:
+\begin{itemize}
+  \item sound for timed automata with diagonals, and
+  \item still finite, hence usable for pruning.
+\end{itemize}
+
+% ------------------------------------------------------------
+
+\subsection*{3. What ``finite simulation'' means (key definition)}
+
+Following~\cite{GAbs}, a simulation $\triangleleft$
+is called \emph{finite} if the mapping
+\[
+Z \longmapsto \downarrow Z
+\quad\text{with}\quad
+\downarrow Z = \{v \mid \exists v' \in Z : v \triangleleft v'\}
+\]
+has \emph{finite range}.
+
+Intuitively:
+\begin{quote}
+There are only finitely many distinct ``behavioural shapes''
+of zones under subsumption.
+\end{quote}
+
+This is exactly what ensures that forward reachability
+with subsumption cannot generate infinitely many new nodes.
+
+% ------------------------------------------------------------
+
+\subsection*{4. Detailed Step 1: Why G-simulation is finite}
+
+This is the technical core.
+
+\subsubsection*{4.1 Decomposition of the simulation}
+
+The valuation-level G-simulation can be written as:
+\[
+v \sqsubseteq^{LU}_G v'
+\iff
+\underbrace{v\ 4_{LU(G)}\ v'}_{\text{non-diagonal part}}
+\ \wedge\
+\underbrace{
+\forall \varphi \in G^+:\ (v\models\varphi \Rightarrow v'\models\varphi)
+}_{\text{diagonal part}}
+\]
+
+where:
+\begin{itemize}
+  \item $G^+$ is the finite set of diagonal constraints in $G(q)$,
+  \item $LU(G)$ is extracted from $G(q)$.
+\end{itemize}
+
+So finiteness is proved by analyzing these two parts separately.
+
+\subsubsection*{4.2 Non-diagonal part: inherited LU finiteness}
+
+The relation $4_{LU(G)}$ is exactly the classical LU-simulation.
+
+By Theorem~4 recalled in~\cite{GAbs}:
+\begin{quote}
+$4_{LU(G)}$ is a finite simulation.
+\end{quote}
+
+So the non-diagonal part already has only finitely many downsets.
+
+\subsubsection*{4.3 Diagonal part: finite Boolean abstraction}
+
+This is the crucial diagonal argument.
+
+Because $G^+$ is finite, each valuation $v$ induces a Boolean vector:
+\[
+\chi(v) \in \{0,1\}^{|G^+|}
+\quad\text{where}\quad
+\chi(v)_\varphi = 1 \iff v\models\varphi.
+\]
+
+Hence:
+\begin{itemize}
+  \item The valuation space is partitioned into at most
+        $2^{|G^+|}$ diagonal classes.
+  \item The diagonal implication check depends only on these classes.
+\end{itemize}
+
+Therefore, the diagonal part of the simulation also has
+only finitely many possible downsets.
+
+\subsubsection*{4.4 Combining both parts}
+
+The full G-simulation is the conjunction of:
+\begin{itemize}
+  \item a finite LU-simulation, and
+  \item a finite diagonal-implication relation.
+\end{itemize}
+
+Thus the overall downset mapping has finite range.
+
+\begin{quote}
+\emph{Conclusion: G-simulation is a finite simulation}
+(Lemma~15 in~\cite{GAbs}).
+\end{quote}
+
+This implies that zone graph exploration with G-simulation
+is terminating at the timed-automaton level.
+
+\subsubsection*{4.5 Current implementation correspondence}
+
+In the current prototype implementation, the theory objects are reflected
+by a cached state summary attached to the symbolic control part:
+\begin{itemize}
+  \item the collected diagonal constraints correspond to $G^+(q)$,
+  \item the simple constraints are projected to local arrays $L,U$,
+        which implement the current approximation of $LU(G(q))$,
+  \item subsumption first checks $aLU$-inclusion using these local
+        bounds, and then checks diagonal implication using $G^+(q)$.
+\end{itemize}
+
+So the implementation now follows the intended decomposition
+\[
+\text{LU}(G(q)) \quad + \quad \text{diagonal implication over } G^+(q),
+\]
+although a fully explicit Boolean abstraction layer is still future work.
+
+% ------------------------------------------------------------
+
+\subsection*{5. Lifting finiteness to PDTA}
+
+Now we plug this result into the PDTA framework.
+
+\subsubsection*{5.1 Root finiteness}
+
+In PDTA, only \textsc{Push} creates new roots.
+A push is added only if there is no equivalent root under~$\sim$.
+
+The PDTA paper explicitly states that G-simulation belongs to the class of
+\emph{strongly finite simulations}.
+
+\medskip
+\noindent
+\emph{Hence, only finitely many roots can be created.}
+
+
+\subsubsection*{5.2 Local finiteness}
+
+Inside each context $S(q,Z)$:
+\begin{itemize}
+  \item Internal and Pop rules add nodes only if they are
+        not subsumed.
+  \item Since G-simulation is finite, only finitely many
+        non-subsumed nodes can appear.
+\end{itemize}
+
+So each $S(q,Z)$ is finite.
+
+% ------------------------------------------------------------
+
+\subsection*{6. Final conclusion}
+
+Combining everything:
+
+\begin{itemize}
+  \item G-simulation yields a finite subsumption relation
+        even with diagonal constraints.
+  \item Root creation is finite (strong finiteness).
+  \item Local exploration is finite (finite simulation).
+\end{itemize}
+
+\begin{quote}
+\textbf{Therefore, the PDTA reachability algorithm
+terminates when G-simulation is used to support diagonal constraints.}
+\end{quote}
+
+This is exactly the finiteness argument required by
+Theorem~3 of~\cite{PDTA}, instantiated with the
+G-simulation construction of~\cite{GAbs}.
+
+% ------------------------------------------------------------
+% Bibliography (explicit papers instead of placeholders)
+% ------------------------------------------------------------
+
+\begin{thebibliography}{9}
+
+\bibitem{PDTA}
+Akshay, P., Gastin, P., Prakash, N.
+\newblock \emph{Fast Zone-Based Algorithms for Reachability in Pushdown Timed Automata}.
+\newblock arXiv:2105.13683.
+\newblock \url{https://arxiv.org/pdf/2105.13683}
+
+\bibitem{GAbs}
+Gastin, P., Mukherjee, K. N., Srivathsan, B.
+\newblock \emph{Fast Algorithms for Handling Diagonal Constraints in Timed Automata}.
+\newblock arXiv:1904.08590.
+\newblock \url{https://arxiv.org/pdf/1904.08590}
+
+\end{thebibliography}
+
+\end{document}
